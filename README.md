@@ -1,77 +1,147 @@
 # EquipTrack
-# EquipTrack
+Backend portfolio project built with Django, DRF, PostgreSQL and Render.
+EquipTrack è una web app sviluppata con Django per gestire veicoli, interventi di manutenzione e ricambi.  
+Il progetto include autenticazione, pannello admin, API REST e deploy pubblico in produzione.
 
-[![Django Tests](https://github.com/TUO_USERNAME/TUO_REPO/actions/workflows/django-tests.yml/badge.svg)](https://github.com/TUO_USERNAME/TUO_REPO/actions/workflows/django-tests.yml)
+## Live Demo
 
-![Python](https://img.shields.io/badge/Python-3.12-blue)
-![Django](https://img.shields.io/badge/Django-6.0-green)
-![DRF](https://img.shields.io/badge/DRF-API-red)
-![Status](https://img.shields.io/badge/status-in%20development-orange)
-EquipTrack è una web application sviluppata con Django per gestire la manutenzione di veicoli, camper e macchine agricole.
+Applicazione online: https://equiptrack-9mz7.onrender.com/
 
 ## Obiettivo del progetto
 
-Questo progetto è stato sviluppato come portfolio backend per mostrare competenze su:
-- Django
-- Django REST Framework
+Questo progetto è stato realizzato come portfolio backend per mostrare competenze pratiche su:
+
+- sviluppo web con Django
 - progettazione di modelli relazionali
-- autenticazione e permessi
-- testing con pytest
-- CI con GitHub Actions
-- deploy con Docker e PostgreSQL
+- creazione di API REST con Django REST Framework
+- autenticazione e autorizzazione
+- configurazione ambiente di produzione
+- deploy su Render
 
 ## Funzionalità principali
 
-- Gestione veicoli associati a un proprietario
-- Storico interventi di manutenzione
-- Gestione ricambi
-- Accesso autenticato con ruoli utente
+- Gestione dei veicoli
+- Gestione degli interventi di manutenzione
+- Gestione dei ricambi
+- Accesso autenticato alle funzionalità applicative
+- Django Admin per la gestione rapida dei dati
 - API REST per veicoli, interventi e ricambi
-- Test automatici su modelli e API
+- Deploy in produzione con Gunicorn e WhiteNoise
 
 ## Stack tecnologico
 
-- Python
-- Django
-- Django REST Framework
-- PostgreSQL
-- Docker
-- Pytest
-- GitHub Actions
+| Area | Tecnologie |
+|------|------------|
+| Backend | Python, Django |
+| API | Django REST Framework |
+| Database | PostgreSQL / SQLite in locale |
+| Deploy | Render |
+| Web server | Gunicorn |
+| Static files | WhiteNoise |
+| Containerizzazione | Docker |
+
+## Architettura del progetto
+
+L'applicazione segue una struttura classica Django con separazione tra configurazione base e configurazione di produzione.  
+La logica principale è organizzata nell'app `manutenzioni`, mentre la configurazione globale del progetto è contenuta nel package `equipTrack`.
+
+### Componenti principali
+
+- `equipTrack/` → configurazione del progetto
+- `manutenzioni/` → modelli, viste, serializer, URL e logica applicativa
+- `templates/` → template HTML
+- `build.sh` → script di build per il deploy
+- `requirements.txt` → dipendenze Python
+- `Dockerfile` → configurazione container
+
+## API disponibili
+
+Gli endpoint REST principali sono:
+
+- `/api/veicoli/`
+- `/api/interventi/`
+- `/api/ricambi/`
+
+L’accesso alle API è protetto tramite autenticazione utente.
 
 ## Avvio in locale
 
+### 1. Clonare il repository
+
 ```bash
-git clone <repo-url>
-cd equiptrack
-python -m venv venv
-source venv/bin/activate
+git clone <https://github.com/bronx-l/equipTrack>
+cd <equipTrack>
+```
+
+### 2. Creare e attivare l’ambiente virtuale
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+```
+
+Su Windows:
+
+```bash
+.venv\Scripts\activate
+```
+
+### 3. Installare le dipendenze
+
+```bash
 pip install -r requirements.txt
+```
+
+### 4. Applicare le migrazioni
+
+```bash
 python manage.py migrate
+```
+
+### 5. Avviare il server di sviluppo
+
+```bash
 python manage.py runserver
 ```
 
-## Avvio con Docker
+## Variabili ambiente principali
 
-```bash
-docker compose up --build
-docker compose exec web python manage.py migrate
+Per la configurazione di produzione vengono usate variabili ambiente come:
+
+```env
+DJANGO_SECRET_KEY=
+DJANGO_DEBUG=
+DJANGO_ALLOWED_HOSTS=
+DJANGO_CSRF_TRUSTED_ORIGINS=
+DATABASE_URL=
 ```
 
-## Test
+## Deploy
 
-```bash
-pytest -v
-```
+L’applicazione è deployata su Render con configurazione production dedicata.  
+Il progetto usa Gunicorn come application server e WhiteNoise per servire i file statici in produzione.
 
-## Roadmap
+## Competenze dimostrate
 
-- Migliorare dashboard veicoli e interventi
-- Aggiungere reminder tagliandi
-- Integrare JWT authentication
-- Aggiungere upload documenti
-- Deploy pubblico su Render
+Questo progetto mostra esperienza pratica in:
 
-## Stato del progetto
+- sviluppo CRUD con Django
+- progettazione database relazionale
+- uso di Django REST Framework
+- configurazione sicurezza base per produzione
+- gestione variabili ambiente
+- troubleshooting di deploy
+- pubblicazione di un’app online funzionante
 
-Progetto in sviluppo attivo, con focus su qualità del codice, struttura pulita e presentazione portfolio.
+## Possibili sviluppi futuri
+
+- Dashboard con statistiche sugli interventi
+- Filtri avanzati su veicoli e manutenzioni
+- Gestione ruoli utente più granulare
+- Test automatici backend
+- Documentazione API più completa
+- Frontend separato con React o Next.js
+
+## Autore
+
+Progetto realizzato come esercizio portfolio per consolidare competenze backend con Django e deploy cloud.
