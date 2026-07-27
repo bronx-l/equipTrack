@@ -1,0 +1,40 @@
+{% extends "manutenzioni/base.html" %}
+
+{% block content %}
+
+<h1>{{ veicolo }}</h1>
+
+<p>
+    Km totali: {{ veicolo.km_totali }}
+</p>
+
+<h2>Storico interventi</h2>
+
+{% if interventi %}
+
+    <ul class="list-group">
+
+        {% for i in interventi %}
+
+            <li class="list-group-item">
+
+                {{ i.data }} -
+                {{ i.descrizione }} -
+                € {{ i.costo }}
+                ({{ i.get_stato_display }})
+
+            </li>
+
+        {% endfor %}
+
+    </ul>
+
+{% else %}
+
+    <p class="text-muted">
+        Nessun intervento registrato per questo veicolo.
+    </p>
+
+{% endif %}
+
+{% endblock %}
